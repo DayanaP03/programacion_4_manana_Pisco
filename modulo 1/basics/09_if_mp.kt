@@ -4,6 +4,7 @@ fun main() {
     println("Ingresa tu nombre:")
     val nombre = readLine() ?: ""
 
+    
     println("Ingresa tu temperatura (°C):")
     val temperatura = readLine()?.toDoubleOrNull() ?: 36.5
 

@@ -6,6 +6,7 @@ fun main() {
     println("Validación de acceso al hotel")
 
     // AND
+    
     println("Puede ingresar: ${edad >= 18 && tieneReserva}")
 
     // OR

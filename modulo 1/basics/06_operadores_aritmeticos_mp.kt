@@ -1,6 +1,7 @@
 fun main() {
     // ReadLine 
     
+    
     println("Algunos costos que podemos observar")
 
     val numero1 = 15

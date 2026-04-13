@@ -1,4 +1,5 @@
 fun main() {
+    
     println("Sistema de pago del hotel")
     println("¿Tiene descuento? (s/n)")
 
