@@ -1,4 +1,5 @@
-fun main(){
+    
+//fun main(){
     println ("Funciones -Paremetros por defecto")
     println(crearUsuario("Jhon", 25, "admin", true))
     println(crearUsuario("Luis"))
@@ -8,7 +9,7 @@ fun main(){
     //Argumentos nombrados
     println(crearUsuario(edad=30, nombre="Day", activo=false))
  
-}
+//}//
 fun crearUsuario(
 nombre: String,
 edad: Int=18,
