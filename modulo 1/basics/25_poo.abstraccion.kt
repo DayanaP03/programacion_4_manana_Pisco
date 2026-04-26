@@ -1,6 +1,6 @@
 // El usuario de esta clase solo sabe QUÉ puede hacer con un Producto
 // No necesita saber cómo se calcula precioConIva ni cómo funciona disponible
-class Producto(
+class Product(
     val id:       Int,
     val nombre:   String,
     val precio:   Double,
@@ -16,7 +16,7 @@ class Producto(
 }
 
 fun main() {
-    val teclado = Producto(1, "Teclado mecánico", 89.99, 15)
+    val teclado = Product(1, "Teclado mecánico", 89.99, 15)
 
     // El código externo usa la interfaz pública — no sabe el detalle interno
     println(teclado.disponible)   // true
