@@ -17,7 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivityCalculator : AppCompatActivity() {
 
 
     private lateinit var webView: WebView
