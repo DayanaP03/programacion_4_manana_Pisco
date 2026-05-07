@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import com.ute.compose.ui.material3.Paso01SumaScreen
 import com.ute.compose.ui.material3.Paso01TextFieldScreen
+import com.ute.compose.ui.material3.Paso01TiendaScreen
+import com.ute.compose.ui.material3.Paso02CardScreen
+import com.ute.compose.ui.material3.Paso03LazyColumnScreen
 
 import com.ute.compose.ui.screens.*
 
@@ -29,8 +32,10 @@ class MainActivity : ComponentActivity() {
                 //componente material 3
                 // ◀ CAMBIA AQUÍ para probar cada paso:
                 //Paso01TextFieldScreen()
-                Paso01SumaScreen()
-                // Paso02_CardScreen()
+                //Paso01SumaScreen()
+                //Paso01TiendaScreen()
+                //Paso02CardScreen()
+                Paso03LazyColumnScreen()
                 // Paso03_LazyColumnScreen()
                 // Paso04_ScaffoldScreen()
                 // Paso05_NavBarScreen()

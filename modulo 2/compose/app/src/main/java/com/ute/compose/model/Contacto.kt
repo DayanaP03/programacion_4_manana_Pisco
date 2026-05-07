@@ -1,5 +1,5 @@
 // model/Contacto.kt
-package com.tuapp.contacto.model
+package com.ute.compose.model
 
 data class Contacto(
     val id:       Int,
