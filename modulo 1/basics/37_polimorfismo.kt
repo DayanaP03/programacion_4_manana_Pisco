@@ -37,7 +37,7 @@ class Efectivo : Pagable {
 // esta intación de la función se puede reutilizar con cualquier nuevo método de pago que implementemos en el futuro
 
 
-fun cobrar(monto: Double, metodoPago: Pagable) {
+fun cobrar(monto: Double, metodoPago: ) {
     println("Procesando pago con ${metodoPago.nombre}...")
     val exito = metodoPago.procesar(monto)
     println(if (exito) "✅ Pago exitoso" else "❌ Pago fallido")
