@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
-import com.ute.compose.ui.material3.Paso01SumaScreen
-import com.ute.compose.ui.material3.Paso01TextFieldScreen
-import com.ute.compose.ui.material3.Paso01TiendaScreen
-import com.ute.compose.ui.material3.Paso02CardScreen
-import com.ute.compose.ui.material3.Paso03LazyColumnScreen
-
-import com.ute.compose.ui.screens.*
+import com.ute.compose.ui.repositorio.Paso01mpScreen
+import com.ute.compose.ui.repositorio.Paso03ColumnaScreen
+import com.ute.compose.ui.repositorio.Paso04ScaffoldScreen
+import com.ute.compose.ui.repositorio.Paso05mpNavBarScreen
+import com.ute.compose.ui.repositorio.Paso06mpDialogosScreen
+import com.ute.compose.ui.respositio.Paso02mpReservaScreen
+//
 
 
 class MainActivity : ComponentActivity() {
@@ -35,11 +35,18 @@ class MainActivity : ComponentActivity() {
                 //Paso01SumaScreen()
                 //Paso01TiendaScreen()
                 //Paso02CardScreen()
-                Paso03LazyColumnScreen()
+                //Paso03LazyColumnScreen()
                 // Paso03_LazyColumnScreen()
                 // Paso04_ScaffoldScreen()
                 // Paso05_NavBarScreen()
 
+                //repaso
+                //Paso01mpScreen()
+                //Paso02mpReservaScreen()
+                //Paso03ColumnaScreen()
+                //Paso04ScaffoldScreen()
+                //Paso05mpNavBarScreen()
+                Paso06mpDialogosScreen()
             // reen()
                 // Paso03_LazyColumnScreen()
                 // Paso04_ScaffoldScreen()
