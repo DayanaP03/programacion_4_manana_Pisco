@@ -1,17 +1,15 @@
 abstract class Figura(val nombre: String) {
-    // abstract — las subclases DEBEN implementar esto (herencia forzada)
+
     abstract val area: Double
     abstract val perimetro: Double
     abstract fun descripcion(): String
 
-    // concreto — disponible en todas las subclases (reutilización)
     fun comparar(otra: Figura): String = when {
         area > otra.area -> "$nombre es más grande que ${otra.nombre}"
         area < otra.area -> "$nombre es más pequeña que ${otra.nombre}"
         else             -> "$nombre y ${otra.nombre} tienen la misma área"
     }
 
-    // Polimorfismo: toString usa area y descripcion que son polimórficas
     override fun toString() = "${descripcion()} | Área: ${"%.2f".format(area)}"
 }
 
