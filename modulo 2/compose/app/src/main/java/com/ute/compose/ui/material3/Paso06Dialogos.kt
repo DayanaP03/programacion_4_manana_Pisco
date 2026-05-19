@@ -1,4 +1,4 @@
-/*package com.ute.compose.ui.material3
+package com.ute.compose.ui.material3
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -431,4 +431,4 @@ private fun DialogNuevoContacto(
 @Composable
 fun Paso06_Preview() {
     MaterialTheme { Paso06DialogosScreen() }
-}*/
+}
