@@ -15,7 +15,7 @@ Edad:   $edad
 Mayor:  ${edad >= 18 ? 'Sí' : 'No'}
   ''';
   print(tarjeta);
-
+ 
   // Raw string — ignora el escape y la interpolación
   final ruta = r'C:\Users\Ana\Documents';  // el \ no se interpreta
   print(ruta);

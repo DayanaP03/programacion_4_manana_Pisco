@@ -22,10 +22,8 @@ void main() {
         print("Rendimiento excelente");
       }
     }
-    
-  }
 
-  print("\n--- RESULTADOS ---");
+  }
   print("Total de cajas empacadas: $totalCajas");
   print("Cantidad de empleados registrados: $empleados");
 
