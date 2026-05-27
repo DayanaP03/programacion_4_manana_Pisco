@@ -4,11 +4,6 @@ void saludar() {
   print('Hello Work ');
 }
 
-//Saludar sin parametro 
-void sumarSinParametro() {
-  return 5+2;
-}
-
 
 // Sintaxis completa — preferida para funciones públicas
 int sumar(int a, int b) {
@@ -34,12 +29,8 @@ String formatearPrecio(double precio) => '\$${precio.toStringAsFixed(2)}';
 formatearPrecioSinTipo(double precio) => '\$${precio.toStringAsFixed(2)}';
 
 void main() {
+  saludar();
   print(formatearPrecio(1299.9));  // $1299.90
-}
-
-void main() {
-  saludar()
-  sumarSinParametro()
   print(sumar(5, 3));   
          // 8
   print(multiplicar(4, 6));    // 24
@@ -53,5 +44,8 @@ void main() {
   print(construirUrlV2('api.ejemplo.com', '/productos'));       // https://api.ejemplo.com:443/productos
 }
 
+Object? construirUrlV2(String s, String t) {
+}
 
-
+Object? construirUrl(String s, String t, int i) {
+}

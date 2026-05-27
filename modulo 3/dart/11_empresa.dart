@@ -34,3 +34,6 @@ void main() {
     print("No se registraron empleados");
   }
 }
+
+readLineSync() {
+}

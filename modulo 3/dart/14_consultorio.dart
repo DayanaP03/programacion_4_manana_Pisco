@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import '11_empresa.dart';
+
 void main() {
   int totalPaciente = 1;
   int cantidad = 0;
@@ -8,13 +10,13 @@ void main() {
     int doctor = 0;
   while (horas > 0) {
     print("Horas trabajadas  ");
-    horas = int.parse(readLineSync()!);
+    horas = int.parse(stdin.readLineSync()!);
     
     print("Cantidad de paciente atendidos  ");
     cantidad = int.parse(readLineSync()!);
     totalPaciente += cantidad;
 
-    pacienteAtendidoPorHora = cantidad / horas  ;
+    var pacienteAtendidoPorHora = cantidad / horas  ;
     doctor ++; 
 
 
@@ -29,9 +31,9 @@ void main() {
     }
 
 
-    print('Total de pacientes atendidos $totalPaciente')
-    print('Cantidad de doctores registrados $doctor')
-    print('Promedio de pacientes por doctor {totalPaciente / doctor } ')
+    print('Total de pacientes atendidos $totalPaciente');
+    print('Cantidad de doctores registrados $doctor');
+    
 
 
   }

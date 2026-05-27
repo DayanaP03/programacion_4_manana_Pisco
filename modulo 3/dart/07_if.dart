@@ -1,3 +1,5 @@
+import 'dart:io';
+
 void main() {
   // Forma básica
   int temperatura = 38;
@@ -24,8 +26,6 @@ void main() {
   print(display2);  // Sin ciudad
 }
 
-import 'dart:io'
-
 void main() {
   print ('Ingresa un numero : ');
   String? numero = stdin.readLineSync(); 
@@ -33,7 +33,7 @@ void main() {
 
 
   print ('Numero negativo: ');
-  int numero = int.parse(stdin.readLineSync()!);
+  int numer = int.parse(stdin.readLineSync()!);
   print ('Numero  $numero');
 
   print (' Numero positivo  :  ');

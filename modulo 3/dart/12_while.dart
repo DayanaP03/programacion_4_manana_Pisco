@@ -3,6 +3,7 @@ void main() {
   int paquetes = 0;
 
 
+  var buffer;
   while (buffer > 0) {
     final tamano = buffer > 256 ? 256 : buffer;
     paquetes++;
