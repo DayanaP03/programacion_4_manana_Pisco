@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import '11_empresa.dart';
 
 void main() {
   int horasTrabajadas= 1;
   int cantidadsillas = 0;
-  int empledado = 0; 
+  int _ = 0; 
 
   while (horasTrabajadas > 0) {
     print("Ingrese cantidad de cajas empacadas (0 para terminar): ");
@@ -32,7 +31,7 @@ void main() {
   print("Cantidad de empleados registrados: $horasTrabajadas");
 
   if (horasTrabajadas > 0) {
-    num cantidad;
+    num _;
     var promedio;
     print("Promedio de cajas por empleado: $promedio");
   } else {

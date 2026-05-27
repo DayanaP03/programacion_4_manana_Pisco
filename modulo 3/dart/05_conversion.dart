@@ -1,15 +1,21 @@
 void main() {
   // Conversiones numéricas
   int    entero  = 42;
+  // ignore: unused_local_variable
   double decimal = entero.toDouble();   // 42.0
+  // ignore: unused_local_variable
   String texto   = entero.toString();   // "42"
 
   // String → número
+  // ignore: unused_local_variable
   int    num1 = int.parse('123');       // 123
+  // ignore: unused_local_variable
   double num2 = double.parse('3.14');   // 3.14
 
   // Conversión segura (no lanza excepción)
+  // ignore: unused_local_variable
   int?    num3 = int.tryParse('abc');   // null
+  // ignore: unused_local_variable
   double? num4 = double.tryParse('99'); // 99.0
 
   // Verificar tipo con is (como en Kotlin)
@@ -20,6 +26,7 @@ void main() {
 
   // Cast explícito con as
   Object obj = 'Hola';
+  // ignore: unused_local_variable
   String str = obj as String;
 
   // Comprobar nulabilidad

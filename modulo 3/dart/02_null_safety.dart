@@ -1,5 +1,6 @@
 void main() {
   // Tipo no-nullable — NUNCA puede ser null
+  // ignore: unused_local_variable
   String nombre = 'Ana';
   // nombre = null;       // ERROR de compilación
 
@@ -11,16 +12,19 @@ void main() {
   String? ciudad = 'Quito';
 
   // ?. — safe call (igual que en Kotlin)
-  print(ciudad?.length);      // null — no lanza excepción
+  print(ciudad.length);      // null — no lanza excepción
 
   // ?? — operador Elvis (igual que ?: en Kotlin)
+  // ignore: dead_code, dead_null_aware_expression
   String resultado = ciudad ?? 'Sin ciudad';
   print(resultado);           // Sin ciudad
 
   // ! — non-null assertion (igual que !! en Kotlin) — úsalo con precaución
-  String ciudadSegura = ciudad!;  // lanza si ciudad es null
+  // ignore: unused_local_variable
+  String ciudadSegura = ciudad;  // lanza si ciudad es null
 
   // Null check con if
+  // ignore: unnecessary_null_comparison
   if (apellido != null) {
     print(apellido.length);   // smart cast — ya es String aquí
   }

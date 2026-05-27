@@ -1,6 +1,7 @@
 void main() {
   // List — lista ordenada (como List en Kotlin)
   List<String> frutas   = ['manzana', 'banana', 'cereza'];
+  // ignore: unused_local_variable
   var          numeros  = [1, 2, 3, 4, 5];       // tipo inferido: List<int>
 
   print(frutas[0]);         // manzana
@@ -32,6 +33,7 @@ void main() {
 
   // Collection if — elementos condicionales
   bool mostrarExtra = true;
+  // ignore: unused_local_variable
   var items = [
     'elemento1',
     'elemento2',

@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'dart:io';
 void main() {
   // Forma básica

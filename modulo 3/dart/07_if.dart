@@ -1,7 +1,10 @@
+// ignore_for_file: dead_code
+
 import 'dart:io';
 
 void main() {
-  // Forma básica
+
+
   int temperatura = 38;
 
   if (temperatura > 37.5) {
@@ -12,64 +15,52 @@ void main() {
     print('Hipotermia');
   }
 
-  // Operador ternario — para decisiones de una línea
-  // condición ? valorSiVerdadero : valorSiFalso
   String estado = temperatura > 37.5 ? 'Con fiebre' : 'Sin fiebre';
   print(estado);
 
-  // null-aware con ternario
   String? ciudad;
-  String display = ciudad != null ? ciudad.toUpperCase() : 'Sin ciudad';
-
-  // Forma más concisa con ??
-  String display2 = ciudad?.toUpperCase() ?? 'Sin ciudad';
-  print(display2);  // Sin ciudad
-}
-
-void main() {
-  print ('Ingresa un numero : ');
-  String? numero = stdin.readLineSync(); 
-  print ('Hola $numero');
+  print(ciudad?.toUpperCase() ?? 'Sin ciudad');
 
 
-  print ('Numero negativo: ');
+
+  print('Ingresa un número: ');
+  int numero = int.parse(stdin.readLineSync()!);
+
+  print('Hola $numero');
+
+  print('Número negativo: ');
   int numer = int.parse(stdin.readLineSync()!);
-  print ('Numero  $numero');
+  print('Número $numer');
 
-  print (' Numero positivo  :  ');
+  print('Número positivo: ');
   double valor = double.parse(stdin.readLineSync()!);
-  print ('Valor $valor');
+  print('Valor $valor');
 
-  print (' Numero cero   :  ');
-  double valor = double.parse(stdin.readLineSync()!);
-  print ('Valor $valor');
+  print('Número cero: ');
+  double valor2 = double.parse(stdin.readLineSync()!);
+  print('Valor $valor2');
 
-    
+  // CORRECTO: ahora sí comparas int
   if (numero >= 1) {
-    print('Numero positivo');
-  } else if (numero == 0 ) {
-    print('Numero cero');
+    print('Número positivo');
+  } else if (numero == 0) {
+    print('Número cero');
   } else {
-    print('Numero ');
+    print('Número negativo');
   }
 
-}
 
-void main() {
+
+
   String? nombre;
 
-  // Sin verificar — error de compilación
-  // print(nombre.length);  // ERROR: nombre puede ser null
-
-  // Forma 1 — verificación explícita
+  // ignore: unnecessary_null_comparison
   if (nombre != null) {
-    print(nombre.length);  // aquí Dart sabe que nombre es String
+    print(nombre.length);
   }
 
-  // Forma 2 — operador ?.
-  print(nombre?.length);  // null, sin excepción
+  print(nombre?.length);
 
-  // Forma 3 — valor por defecto
   int longitud = nombre?.length ?? 0;
-  print(longitud);  // 0
+  print(longitud);
 }

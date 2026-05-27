@@ -1,40 +1,37 @@
 import 'dart:io';
 
-import '11_empresa.dart';
-
 void main() {
-  int totalPaciente = 1;
+
+  int totalPacientes = 0;
   int cantidad = 0;
-  int promedio = 0;
-  int horas = 0 ;
-    int doctor = 0;
+  int doctores = 0;
+  int horas = 1;
+
   while (horas > 0) {
-    print("Horas trabajadas  ");
+
+    print("Horas trabajadas (0 para terminar): ");
     horas = int.parse(stdin.readLineSync()!);
-    
-    print("Cantidad de paciente atendidos  ");
-    cantidad = int.parse(readLineSync()!);
-    totalPaciente += cantidad;
 
-    var pacienteAtendidoPorHora = cantidad / horas  ;
-    doctor ++; 
+    if (horas > 0) {
 
+      print("Cantidad de pacientes atendidos: ");
+      cantidad = int.parse(stdin.readLineSync()!);
 
-      if (pacienteAtendidoPorHora < 3) {
-        print("ATencion Lenta");
-      } else if (pacienteAtendidoPorHora < 6) {
-        print("Atencion normal");
+      totalPacientes += cantidad;
+      doctores++;
+
+      double pacientesPorHora = cantidad / horas;
+
+      if (pacientesPorHora < 3) {
+        print("Atención lenta");
+      } else if (pacientesPorHora < 6) {
+        print("Atención normal");
       } else {
-        print("Atencion rapida ");
+        print("Atención rápida");
       }
-
     }
-
-
-    print('Total de pacientes atendidos $totalPaciente');
-    print('Cantidad de doctores registrados $doctor');
-    
-
-
   }
 
+  print("Total de pacientes atendidos: $totalPacientes");
+  print("Cantidad de doctores registrados: $doctores");
+}

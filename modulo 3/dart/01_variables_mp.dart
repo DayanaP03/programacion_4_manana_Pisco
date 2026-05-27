@@ -17,6 +17,23 @@ void main() {
 
   final fechaReserva = DateTime.now();
 
+  print(nombreHotel);
+  print(habitacionesDisponibles);
+  print(precioNoche);
+  print(reservaActiva);
+
+  print(nombreCliente);
+  print(numeroHabitacion);
+  print(costoPiscina);
+  print(servicioVip);
+
+  print(ciudadHotel);
+
+  print(impuesto);
+  print(descuento);
+
+  print(fechaReserva);
+
   print(
     '$nombreCliente tiene reservada la habitación '
     '$numeroHabitacion en $nombreHotel'
@@ -26,6 +43,8 @@ void main() {
 
   totalReservas = 5;
 
+  print(totalReservas);
+
   final serviciosHotel = [
     'Piscina',
     'WiFi',
@@ -34,8 +53,12 @@ void main() {
 
   serviciosHotel.add('Restaurante');
 
+  print(serviciosHotel);
+
   const tiposHabitacion = [
     'Simple',
     'Doble'
   ];
+
+  print(tiposHabitacion);
 }
