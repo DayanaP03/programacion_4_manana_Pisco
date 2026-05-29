@@ -2,6 +2,7 @@ fun main() {
 
     println("Operadores de Comparacion en costos de hotel ")
 
+    
     val numero1 = 15
     val numero2 = 2
     val numero3 = 3

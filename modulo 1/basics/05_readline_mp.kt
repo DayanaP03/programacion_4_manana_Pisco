@@ -1,4 +1,5 @@
 fun main() {
+    
     println("Escribe tu nombre para poder ser atendido")
     val nombre = readLine() ?: ""
 

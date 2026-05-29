@@ -6,6 +6,7 @@ fun main() {
     println("Ingresa tu temperatura (°C):")
     val temperatura = readLine()?.toDoubleOrNull() ?: 36.5
 
+    
     if (esVIP) {
         println("Cliente VIP ")
         if (temperatura < 38) {

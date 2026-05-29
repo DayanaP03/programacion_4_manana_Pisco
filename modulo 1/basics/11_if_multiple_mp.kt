@@ -1,5 +1,6 @@
 fun main() {
     println(" Clasificación de hoteles por precio")
+    
     println("Ingresa el precio por noche (USD):")
 
     val precio = readLine()?.toDoubleOrNull() ?: 0.0

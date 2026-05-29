@@ -1,5 +1,6 @@
 fun main() {
 
+    
     println("Sistema de selección de habitaciones")
     println("Elige una opción:")
 
