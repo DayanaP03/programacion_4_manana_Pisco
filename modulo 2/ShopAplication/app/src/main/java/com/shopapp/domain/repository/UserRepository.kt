@@ -23,4 +23,11 @@ interface UserRepository {
 
     /** Sube o reemplaza el avatar. Devuelve la URL absoluta resultante. */
     suspend fun uploadAvatar(uri: Uri): Result<String>
+
+    // ── Notificaciones de staff ───────────────────────────────────────────────
+    suspend fun sendNotification(
+        subject: String,
+        message: String,
+        userId:  Int? = null,
+    ): Result<com.shopapp.domain.model.NotificationResult>
 }
