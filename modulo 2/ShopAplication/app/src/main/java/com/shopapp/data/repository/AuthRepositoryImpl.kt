@@ -72,6 +72,31 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun requestReset(email: String): Result<String> = runCatching {
+        val response = api.requestPasswordReset(PasswordResetRequestDto(email))
+        if (!response.isSuccessful) {
+            val errorBody = response.errorBody()?.string() ?: ""
+            error(parseErrorMessage(errorBody, response.code()))
+        }
+        response.body()?.detail ?: "Enlace de recuperación enviado"
+    }
+
+    override suspend fun confirmReset(
+        uid: String,
+        token: String,
+        newPassword: String,
+        newPassword2: String
+    ): Result<String> = runCatching {
+        val response = api.confirmPasswordReset(
+            PasswordResetConfirmDto(uid, token, newPassword, newPassword2)
+        )
+        if (!response.isSuccessful) {
+            val errorBody = response.errorBody()?.string() ?: ""
+            error(parseErrorMessage(errorBody, response.code()))
+        }
+        response.body()?.detail ?: "Contraseña actualizada correctamente"
+    }
+
     // Extrae el mensaje de error legible del JSON de Django
     private fun parseErrorMessage(body: String, code: Int): String {
         return try {
