@@ -136,7 +136,7 @@ fun NavGraph(
                     onBack         = { navController.popBackStack() },
                     onResetSuccess = {
                         navController.navigate(Screen.Login.route) {
-                            popUpTo(Screen.ForgotPassword.route) { inclusive = true }
+                            popUpTo(Screen.Login.route) { inclusive = true }
                         }
                     }
                 )
