@@ -1,0 +1,50 @@
+package com.shopapp.data.remote.api
+
+import com.shopapp.data.remote.dto.*
+import okhttp3.MultipartBody
+import retrofit2.Response
+import retrofit2.http.*
+
+interface UserApi {
+    @GET("users/")
+    suspend fun getUsers(
+        @Query("search")    search:   String?,
+        @Query("is_staff")  isStaff:  Boolean?,
+        @Query("is_active") isActive: Boolean?,
+        @Query("page")      page:     Int?,
+    ): Response<PaginatedDto<UserDto>>
+
+    @GET("users/{id}/")
+    suspend fun getUser(@Path("id") id: Int): Response<UserDto>
+
+    @POST("users/")
+    suspend fun createUser(@Body body: UserRequestDto): Response<UserDto>
+
+    @PATCH("users/{id}/")
+    suspend fun updateUser(
+        @Path("id") id: Int,
+        @Body body: UserRequestDto,
+    ): Response<UserDto>
+
+    @DELETE("users/{id}/")
+    suspend fun deleteUser(@Path("id") id: Int): Response<Unit>
+
+    @POST("users/{id}/toggle_active/")
+    suspend fun toggleActive(@Path("id") id: Int): Response<ToggleActiveResponseDto>
+
+    @GET("users/profile/")
+    suspend fun getProfile(): Response<UserDto>
+
+    /**
+     * Sube o reemplaza el avatar del usuario autenticado.
+     * Backend: PATCH /api/users/profile/  multipart/form-data campo "avatar"
+     */
+    @Multipart
+    @PATCH("users/profile/")
+    suspend fun uploadAvatar(
+        @Part avatar: MultipartBody.Part,
+    ): Response<UserDto>
+
+    @GET("users/stats/")
+    suspend fun getStats(): Response<UserStatsDto>
+}
