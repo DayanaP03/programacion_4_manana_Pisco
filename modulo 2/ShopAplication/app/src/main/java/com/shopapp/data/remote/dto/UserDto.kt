@@ -25,7 +25,6 @@ data class UserRequestDto(
     @SerializedName("is_staff")   val isStaff:   Boolean,
     @SerializedName("is_active")  val isActive:  Boolean,
     val password:   String? = null,
-    @SerializedName("avatar_url") val avatarUrl: String? = null,
 )
 
 data class ToggleActiveResponseDto(
@@ -63,5 +62,4 @@ fun UserPayload.toRequest() = UserRequestDto(
     isStaff   = isStaff,
     isActive  = isActive,
     password  = password,
-    avatarUrl = avatarUrl,
 )

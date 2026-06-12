@@ -21,5 +21,4 @@ data class UserPayload(
     val isStaff: Boolean,
     val isActive: Boolean,
     val password: String? = null,
-    val avatarUrl: String? = null,
 )
