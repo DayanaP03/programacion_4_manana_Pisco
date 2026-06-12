@@ -13,7 +13,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,9 +37,10 @@ import com.shopapp.theme.*
 
 @Composable
 fun ProfileScreen(
-    authViewModel: AuthViewModel,
-    onLogout:      () -> Unit,
-    viewModel:     ProfileViewModel = hiltViewModel(),
+    authViewModel:      AuthViewModel,
+    onLogout:           () -> Unit,
+    onSendNotification: () -> Unit = {},
+    viewModel:          ProfileViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     val user = state.profile
@@ -156,6 +159,39 @@ fun ProfileScreen(
             }
 
             Spacer(Modifier.height(24.dp))
+
+            if (user?.isStaff == true) {
+                Surface(
+                    color = Surface,
+                    shape = MaterialTheme.shapes.large,
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
+                ) {
+                    ListItem(
+                        headlineContent = {
+                            Text("Enviar notificación", fontWeight = FontWeight.Medium, color = TextPrimary)
+                        },
+                        supportingContent = {
+                            Text("Envía un correo a uno o todos los usuarios", color = TextSecondary)
+                        },
+                        leadingContent = {
+                            Icon(
+                                imageVector = Icons.Default.Send,
+                                contentDescription = null,
+                                tint = Accent,
+                            )
+                        },
+                        trailingContent = {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                                contentDescription = null,
+                                tint = TextSecondary,
+                            )
+                        },
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                        modifier = Modifier.clickable(onClick = onSendNotification),
+                    )
+                }
+            }
 
             // ── Botón cerrar sesión ───────────────────────────────
             var showConfirm by remember { mutableStateOf(false) }
