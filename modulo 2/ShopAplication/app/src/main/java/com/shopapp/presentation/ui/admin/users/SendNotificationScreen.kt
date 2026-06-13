@@ -25,7 +25,7 @@ fun SendNotificationScreen(
     val state by viewModel.state.collectAsState()
     var subject   by remember { mutableStateOf("") }
     var message   by remember { mutableStateOf("") }
-    var userIdStr by remember { mutableStateOf("") }   // vacío = envío masivo
+    var userIdStr by remember { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
 

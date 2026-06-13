@@ -23,7 +23,7 @@ import com.shopapp.theme.*
 fun LoginScreen(
     onLoginSuccess:  (isStaff: Boolean) -> Unit,
     onNavigateToRegister: () -> Unit,
-    onForgotPassword:     () -> Unit = {},   // ← nuevo parámetro
+    onForgotPassword:     () -> Unit = {},
     viewModel: AuthViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()

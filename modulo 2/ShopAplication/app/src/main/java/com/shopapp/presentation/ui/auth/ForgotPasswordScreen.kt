@@ -63,7 +63,7 @@ fun ForgotPasswordScreen(
             Spacer(Modifier.height(48.dp))
 
             if (!state.emailSent) {
-                // ── Formulario de solicitud ───────────────────────────────────
+
                 Icon(
                     imageVector        = Icons.Default.Email,
                     contentDescription = null,
@@ -114,7 +114,7 @@ fun ForgotPasswordScreen(
                 }
 
             } else {
-                // ── Confirmación de envío ─────────────────────────────────────
+
                 Icon(
                     imageVector        = Icons.Default.MarkEmailRead,
                     contentDescription = null,

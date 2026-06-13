@@ -25,7 +25,7 @@ import com.shopapp.presentation.viewmodel.ResetPasswordConfirmViewModel
 @Composable
 fun ResetPasswordConfirmScreen(
     onBack:         () -> Unit,
-    onResetSuccess: () -> Unit,             // navega al login tras reset exitoso
+    onResetSuccess: () -> Unit,
     viewModel:      ResetPasswordConfirmViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()

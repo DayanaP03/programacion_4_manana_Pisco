@@ -35,10 +35,7 @@ interface UserApi {
     @GET("users/profile/")
     suspend fun getProfile(): Response<UserDto>
 
-    /**
-     * Sube o reemplaza el avatar del usuario autenticado.
-     * Backend: PATCH /api/users/profile/  multipart/form-data campo "avatar"
-     */
+
     @Multipart
     @PATCH("users/profile/")
     suspend fun uploadAvatar(
@@ -48,13 +45,8 @@ interface UserApi {
     @GET("users/stats/")
     suspend fun getStats(): Response<UserStatsDto>
 
-    // ── Notificaciones de staff ───────────────────────────────────────────────
 
-    /**
-     * Envía un correo personalizado o masivo.
-     * Requiere is_staff = true en el backend (IsAdminUser → 403 si no es staff).
-     * Backend: POST /api/emails/send/
-     */
+
     @POST("emails/send/")
     suspend fun sendNotification(
         @Body body: SendNotificationDto,

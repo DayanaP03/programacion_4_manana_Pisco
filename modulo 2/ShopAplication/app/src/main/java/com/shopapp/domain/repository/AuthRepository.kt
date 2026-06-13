@@ -16,7 +16,7 @@ interface AuthRepository {
     suspend fun isLoggedIn(): Boolean
     suspend fun getProfile(): Result<LoggedUser>
 
-    // ── Recuperación de contraseña ───────────────────────────────────────────
+
     suspend fun requestReset(email: String): Result<String>
     suspend fun confirmReset(
         uid:          String,
@@ -25,3 +25,5 @@ interface AuthRepository {
         newPassword2: String,
     ): Result<String>
 }
+
+

@@ -193,7 +193,6 @@ fun ProfileScreen(
                 }
             }
 
-            // ── Botón cerrar sesión ───────────────────────────────
             var showConfirm by remember { mutableStateOf(false) }
 
             OutlinedButton(

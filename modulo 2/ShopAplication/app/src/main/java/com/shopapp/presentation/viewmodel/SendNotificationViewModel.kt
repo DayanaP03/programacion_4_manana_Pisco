@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 data class SendNotificationUiState(
     val isLoading: Boolean             = false,
-    val result:    NotificationResult? = null,  // resultado del último envío
+    val result:    NotificationResult? = null,
     val error:     String?             = null,
 )
 

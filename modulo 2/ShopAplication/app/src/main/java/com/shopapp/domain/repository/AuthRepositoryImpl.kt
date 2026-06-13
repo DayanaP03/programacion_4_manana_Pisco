@@ -60,6 +60,23 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun isLoggedIn(): Boolean =
         !tokenDataStore.getAccessToken().isNullOrBlank()
 
+    override suspend fun getProfile(): Result<LoggedUser> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun requestReset(email: String): Result<String> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun confirmReset(
+        uid: String,
+        token: String,
+        newPassword: String,
+        newPassword2: String
+    ): Result<String> {
+        TODO("Not yet implemented")
+    }
+
     // Extrae el mensaje de error legible del JSON de Django
     private fun parseErrorMessage(body: String, code: Int): String {
         return try {

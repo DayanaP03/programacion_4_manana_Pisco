@@ -365,7 +365,6 @@ fun NavGraph(
                 }
             }
 
-            // ── ADMIN ORDER DETAIL ─────────────────
             composable(
                 route     = "admin/orders/{id}",
                 arguments = listOf(navArgument("id") { type = NavType.IntType }),
@@ -412,7 +411,7 @@ fun NavGraph(
                 }
             }
 
-            // ── ADMIN USERS (CORREGIDO) ────────────
+
             composable("admin/users") {
                 if (!isStaff) {
                     LaunchedEffect(Unit) {
