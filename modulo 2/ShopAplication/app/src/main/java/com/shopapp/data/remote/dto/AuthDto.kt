@@ -49,10 +49,7 @@ data class PasswordResetConfirmDto(
     @SerializedName("new_password2") val newPassword2: String,
 )
 
-/**
- * Respuesta genérica { "detail": "..." }
- * Usada por ambos endpoints de recuperación de contraseña.
- */
+
 data class MessageDto(
     @SerializedName("detail") val detail: String,
 )
