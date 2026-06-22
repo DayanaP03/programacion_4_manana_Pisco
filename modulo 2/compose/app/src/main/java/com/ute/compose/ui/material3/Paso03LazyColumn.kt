@@ -1,5 +1,6 @@
 package com.ute.compose.ui.material3
 
+// ui/Paso03_LazyColumn.kt
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ute.compose.model.Contacto
 import com.ute.compose.model.contactosDeMuestra
 
 @Composable
@@ -131,8 +131,7 @@ fun Paso03LazyColumnScreen() {
                     key   = { it.id }
                 ) { contacto ->
                     TarjetaContacto(
-                        contacto  = contacto,
-                        onLlamar  = { /* Paso 6: snackbar */ },
+                        contacto, onLlamar  = { /* Paso 6: snackbar */ },
                         onFavorito = {
                             // Creamos nueva lista con el favorito modificado
                             // Las listas en Kotlin son inmutables por defecto —
@@ -154,6 +153,6 @@ fun Paso03LazyColumnScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun Paso03Preview() {
+fun Paso03_Preview() {
     MaterialTheme { Paso03LazyColumnScreen() }
 }
