@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomizedSizedBox extends StatelessWidget {
-  final String nombre;
-  final String detalle;
-  final bool   activo;
-
-  const CustomizedSizedBox({
-    super.key,
-    required this.nombre,
-    required this.detalle,
-    required this.activo,
-  });                                   
+  const CustomizedSizedBox({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
+      padding: const EdgeInsets.all(16),
+      children: [
           // SizedBox — espaciado fijo
           const Text('SizedBox', style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
@@ -53,12 +44,13 @@ class CustomizedSizedBox extends StatelessWidget {
           const Text('Wrap', style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Wrap(
-            spacing:    8,
+            spacing: 8,
             runSpacing: 8,
             children: ['nginx', 'TLS 1.3', 'HTTP/2', 'IPv6', 'Load Balancer', 'CDN', 'WAF']
-                .map((t) => Chip(label: Text(t)))
-                .toList(),
+              .map((t) => Chip(label: Text(t)))
+              .toList(),
           ),
         ],
-      ),
+      );
+  }
 }
