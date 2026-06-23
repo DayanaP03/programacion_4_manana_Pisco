@@ -2,6 +2,10 @@
 import 'package:flutter/material.dart';
 import 'screens/pantalla_tema.dart';
 import 'screens/pantalla_appbar.dart';
+import 'widgets/catalogo_botones.dart';
+import 'screens/pantalla_navegacion.dart';
+import 'screens/pantalla_dialogs.dart';
+
 
 
 // ┌──────────────────────────────────────────────────────────────────┐
@@ -13,7 +17,7 @@ import 'screens/pantalla_appbar.dart';
 // │  5  Paso 5  NavigationBar con 4 pestañas                        │
 // │  6  Paso 6  SnackBar y AlertDialog                              │
 // └──────────────────────────────────────────────────────────────────┘
-const int paso = 3;
+const int paso = 6;
 
 void main() => runApp(const AppMonitoreo());
 
@@ -50,7 +54,10 @@ class _AppMonitoreoState extends State<AppMonitoreo> {
        onToggle:  (mode) => setState(() => _themeMode = mode),
      ),
         3 => const PantallaAppBar(),
-        
+        4 => const CatalogoBotones(),
+        5 => const PantallaNavegacion(),
+        6 => const PantallaDialogs(),
+
         _ => Scaffold(
             body: Center(child: Text('Paso $paso: crea el widget primero'))),
       },
