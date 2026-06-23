@@ -22,7 +22,7 @@ import com.ute.compose.model.contactosDeMuestra
 // ── Composable reutilizable — se usará desde el Paso 3 en adelante ───────────
 @Composable
 fun TarjetaContacto(
-    contacto: Contacto,
+    contacto:  Contacto,
     onClick:   () -> Unit = {},
     onLlamar:  () -> Unit = {},
     onFavorito: () -> Unit = {}

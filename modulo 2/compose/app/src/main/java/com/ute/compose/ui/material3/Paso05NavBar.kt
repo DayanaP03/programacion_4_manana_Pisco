@@ -1,6 +1,5 @@
 package com.ute.compose.ui.material3
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -128,7 +127,7 @@ private fun PantallaContactosContent(
 }
 
 @Composable
-private fun PantallaFavoritosContent(
+fun PantallaFavoritosContent(
     favoritos: List<Contacto>,
     modifier:  Modifier = Modifier
 ) {
