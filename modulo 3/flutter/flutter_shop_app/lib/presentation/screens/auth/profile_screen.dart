@@ -25,8 +25,8 @@ class ProfileScreen extends ConsumerWidget {
               // Avatar
               Container(
                 width:  80, height: 80,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
                     colors: [AppColors.accent, AppColors.accentLight],
                     begin:  Alignment.topLeft,
                     end:    Alignment.bottomRight,
@@ -123,6 +123,19 @@ class ProfileScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 24),
+
+              if (user?.isStaff == true) ...[
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: ElevatedButton.icon(
+                    onPressed: () => context.go('/admin'),
+                    icon: const Icon(Icons.admin_panel_settings_outlined),
+                    label: const Text('Panel Admin'),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
 
               // Botón logout
               _LogoutButton(
