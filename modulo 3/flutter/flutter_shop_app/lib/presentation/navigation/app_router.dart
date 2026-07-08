@@ -19,7 +19,8 @@ import '../widgets/admin_shell.dart';
 import 'public_shell.dart';
 import '../screens/admin/categories_admin_screen.dart';
 import '../screens/admin/products_admin_screen.dart';
-
+import '../screens/admin/orders_admin_screen.dart';
+import '../screens/admin/order_admin_detail_screen.dart';
 
 
 // lib/presentation/navigation/app_router.dart — placeholder solo para AdminShell
@@ -117,7 +118,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => AdminShell(
           title: 'Pedidos',
           currentRoute: state.matchedLocation,
-          child: const _AdminPlaceholder('Pedidos admin — M10'),
+          child: const OrdersAdminScreen(),
         ),
       ),
       GoRoute(
@@ -125,8 +126,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => AdminShell(
           title: 'Detalle pedido',
           currentRoute: '/admin/orders',
-          child: _AdminPlaceholder(
-            'Pedido #${state.pathParameters['id']} — M10',
+          child: OrderAdminDetailScreen(
+            orderId: int.parse(state.pathParameters['id']!),
           ),
         ),
       ),
