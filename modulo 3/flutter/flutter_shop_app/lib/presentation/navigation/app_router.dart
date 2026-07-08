@@ -136,7 +136,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => AdminShell(
           title: 'Usuarios',
           currentRoute: state.matchedLocation,
-          child: const _AdminPlaceholder('Usuarios — M11'),
+          child: child: const UsersAdminScreen(),
         ),
       ),
     ],
