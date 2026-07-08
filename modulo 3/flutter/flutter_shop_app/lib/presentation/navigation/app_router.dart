@@ -5,37 +5,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../domain/model/auth_state.dart';
 import '../providers/auth_provider.dart';
+import '../screens/auth/forgot_password_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/profile_screen.dart';
 import '../screens/auth/register_screen.dart';
-import '../screens/admin/dashboard_screen.dart';
-import '../screens/cart/cart_screen.dart';
+import '../screens/auth/reset_password_confirm_screen.dart';
+import '../screens/admin/send_notification_screen.dart';
 import '../screens/catalog/catalog_screen.dart';
 import '../screens/catalog/home_screen.dart';
 import '../screens/catalog/product_detail_screen.dart';
+import '../screens/cart/cart_screen.dart';
 import '../screens/orders/order_detail_screen.dart';
 import '../screens/orders/orders_screen.dart';
+import '../screens/admin/dashboard_screen.dart';
+import '../screens/admin/categories_admin_screen.dart';
+import '../screens/admin/order_admin_detail_screen.dart';
+import '../screens/admin/orders_admin_screen.dart';
+import '../screens/admin/products_admin_screen.dart';
+import '../screens/admin/users_admin_screen.dart';
 import '../widgets/admin_shell.dart';
 import 'public_shell.dart';
-import '../screens/admin/categories_admin_screen.dart';
-import '../screens/admin/products_admin_screen.dart';
-import '../screens/admin/orders_admin_screen.dart';
-import '../screens/admin/order_admin_detail_screen.dart';
-import '../screens/admin/users_admin_screen.dart';
 
-
-// lib/presentation/navigation/app_router.dart — placeholder solo para AdminShell
-
-class _AdminPlaceholder extends StatelessWidget {
-  final String title;
-  const _AdminPlaceholder(this.title);
-
-  @override
-  Widget build(BuildContext context) => Center(
-        child: Text(title,
-            style: const TextStyle(color: Color(0xFF8888AA), fontSize: 16)),
-      );
-}
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
@@ -44,13 +34,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       final auth     = ref.read(authProvider);
       final location = state.matchedLocation;
 
-      if (auth.isChecking)        return null;
+      if (auth.isChecking) return null;
 
-      final isAuthRoute = location == '/login' || location == '/register';
+      final isAuthRoute = location == '/login'
+          || location == '/register'
+          || location == '/forgot-password'
+          || location == '/reset-password-confirm';
 
       if (!auth.isAuthenticated && !isAuthRoute) return '/login';
       if ( auth.isAuthenticated &&  isAuthRoute) return auth.isStaff ? '/admin' : '/';
       if ( auth.isAuthenticated && !auth.isStaff && location.startsWith('/admin')) return '/';
+      if ( auth.isAuthenticated && !auth.isStaff && location == '/send-notification') return '/';
 
       return null;
     },
@@ -58,29 +52,33 @@ final routerProvider = Provider<GoRouter>((ref) {
       // ── Auth ──────────────────────────────────────────────
       GoRoute(path: '/login',    builder: (_, __) => const LoginScreen()),
       GoRoute(path: '/register', builder: (_, __) => const RegisterScreen()),
+      GoRoute(path: '/forgot-password',        builder: (_, __) => const ForgotPasswordScreen()),
+      GoRoute(path: '/reset-password-confirm', builder: (_, __) => const ResetPasswordConfirmScreen()),
+
+      // ── Staff ─────────────────────────────────────────────
+      GoRoute(path: '/send-notification', builder: (_, __) => const SendNotificationScreen()),
 
       // ── Zona pública con BottomNavBar ──────────────────────
       ShellRoute(
         builder: (_, __, child) => PublicShell(child: child),
         routes: [
-          GoRoute(path: '/', builder: (_, __) => const HomeScreen()),
+          GoRoute(path: '/',       builder: (_, __) => const HomeScreen()),
           GoRoute(
             path: '/catalog',
             builder: (_, __) => const CatalogScreen(),
             routes: [
               GoRoute(
                 path: ':id',
-                builder: (_, state) {
-                  final id = int.parse(state.pathParameters['id']!);
-                  return ProductDetailScreen(productId: id);
-                },
+                builder: (_, s) => ProductDetailScreen(
+                  productId: int.parse(s.pathParameters['id']!),
+                ),
               ),
             ],
           ),
-          GoRoute(path: '/cart', builder: (_, __) => const CartScreen()),
-          GoRoute(path: '/orders', builder: (_, __) => const OrdersScreen()),
+          GoRoute(path: '/cart',    builder: (_, __) => const CartScreen()),
+          GoRoute(path: '/orders',  builder: (_, __) => const OrdersScreen()),
           GoRoute(
-            path: '/orders/:id',
+            path:    '/orders/:id',
             builder: (_, s) => OrderDetailScreen(
               orderId: int.parse(s.pathParameters['id']!),
             ),
@@ -91,53 +89,53 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // ── Admin ─────────────────────────────────────────────
       GoRoute(
-        path: '/admin',
-        builder: (_, state) => AdminShell(
-          title: 'Dashboard',
-          currentRoute: state.matchedLocation,
-          child: const DashboardScreen(),
+        path:    '/admin',
+        builder: (_, s) => AdminShell(
+          title:        'Dashboard',
+          currentRoute: s.matchedLocation,
+          child:        const DashboardScreen(),
         ),
       ),
       GoRoute(
-        path: '/admin/categories',
-        builder: (_, state) => AdminShell(
-          title: 'Categorías',
-          currentRoute: state.matchedLocation,
-          child: const CategoriesAdminScreen(),
+        path:    '/admin/categories',
+        builder: (_, s) => AdminShell(
+          title:        'Categorías',
+          currentRoute: s.matchedLocation,
+          child:        const CategoriesAdminScreen(),
         ),
       ),
       GoRoute(
-        path: '/admin/products',
-        builder: (_, state) => AdminShell(
-          title: 'Productos',
-          currentRoute: state.matchedLocation,
-          child: const ProductsAdminScreen(),
+        path:    '/admin/products',
+        builder: (_, s) => AdminShell(
+          title:        'Productos',
+          currentRoute: s.matchedLocation,
+          child:        const ProductsAdminScreen(),
         ),
       ),
       GoRoute(
-        path: '/admin/orders',
-        builder: (_, state) => AdminShell(
-          title: 'Pedidos',
-          currentRoute: state.matchedLocation,
-          child: const OrdersAdminScreen(),
+        path:    '/admin/orders',
+        builder: (_, s) => AdminShell(
+          title:        'Pedidos',
+          currentRoute: s.matchedLocation,
+          child:        const OrdersAdminScreen(),
         ),
       ),
       GoRoute(
-        path: '/admin/orders/:id',
-        builder: (_, state) => AdminShell(
-          title: 'Detalle pedido',
+        path:    '/admin/orders/:id',
+        builder: (_, s) => AdminShell(
+          title:        'Detalle pedido #${s.pathParameters['id']}',
           currentRoute: '/admin/orders',
-          child: OrderAdminDetailScreen(
-            orderId: int.parse(state.pathParameters['id']!),
+          child:        OrderAdminDetailScreen(
+            orderId: int.parse(s.pathParameters['id']!),
           ),
         ),
       ),
       GoRoute(
-        path: '/admin/users',
-        builder: (_, state) => AdminShell(
-          title: 'Usuarios',
-          currentRoute: state.matchedLocation,
-          child: const UsersAdminScreen(),
+        path:    '/admin/users',
+        builder: (_, s) => AdminShell(
+          title:        'Usuarios',
+          currentRoute: s.matchedLocation,
+          child:        const UsersAdminScreen(),
         ),
       ),
     ],
