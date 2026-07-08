@@ -1,5 +1,4 @@
-// lib/domain/model/product.dart
-
+// lib/domain/model/product.dart  (extracto relevante)
 class ProductCategory {
   final int    id;
   final String name;
@@ -18,7 +17,7 @@ class Product {
   final int              stock;
   final bool             inStock;
   final bool             isActive;
-  final String?          imageUrl;
+  final String?          imageUrl;       // <-- URL absoluta o null
   final ProductCategory? category;
   final String           createdAt;
   final String           updatedAt;
@@ -32,8 +31,8 @@ class Product {
     required this.stock,
     required this.inStock,
     required this.isActive,
-    this.imageUrl,
-    this.category,
+    required this.imageUrl,
+    required this.category,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -55,42 +54,45 @@ class Product {
     updatedAt:    j['updated_at']                          as String,
   );
 
-  /// Producto vacío usado como placeholder cuando no se encuentra el producto.
+  /// Placeholder usado cuando el producto no se encuentra en el catálogo.
   static Product empty() => const Product(
-    id: 0,
-    name: '',
-    description: '',
-    price: 0.0,
-    priceWithTax: 0.0,
-    stock: 0,
-    inStock: false,
-    isActive: false,
-    imageUrl: null,
-    category: null,
-    createdAt: '',
-    updatedAt: '',
+    id: 0, name: '', description: '', price: 0.0, priceWithTax: 0.0,
+    stock: 0, inStock: false, isActive: false, imageUrl: null, category: null,
+    createdAt: '', updatedAt: '',
   );
 
-  Product copyWith({bool? isActive, int? stock}) => Product(
+  Product copyWith({
+    String?           name,
+    String?           description,
+    double?           price,
+    double?           priceWithTax,
+    int?              stock,
+    bool?             inStock,
+    bool?             isActive,
+    String?           imageUrl,
+    ProductCategory?  category,
+    String?           createdAt,
+    String?           updatedAt,
+  }) => Product(
     id:           id,
-    name:         name,
-    description:  description,
-    price:        price,
-    priceWithTax: priceWithTax,
-    stock:        stock       ?? this.stock,
-    inStock:      (stock ?? this.stock) > 0,
-    isActive:     isActive    ?? this.isActive,
-    imageUrl:     imageUrl,
-    category:     category,
-    createdAt:    createdAt,
-    updatedAt:    updatedAt,
+    name:         name ?? this.name,
+    description:  description ?? this.description,
+    price:        price ?? this.price,
+    priceWithTax: priceWithTax ?? this.priceWithTax,
+    stock:        stock ?? this.stock,
+    inStock:      inStock ?? this.inStock,
+    isActive:     isActive ?? this.isActive,
+    imageUrl:     imageUrl ?? this.imageUrl,
+    category:     category ?? this.category,
+    createdAt:    createdAt ?? this.createdAt,
+    updatedAt:    updatedAt ?? this.updatedAt,
   );
 }
 
 class PaginatedProducts {
-  final int            count;
-  final String?        next;
-  final List<Product>  results;
+  final int           count;
+  final String?       next;
+  final List<Product> results;
 
   const PaginatedProducts({
     required this.count,
@@ -98,11 +100,12 @@ class PaginatedProducts {
     required this.results,
   });
 
-  factory PaginatedProducts.fromJson(Map<String, dynamic> j) => PaginatedProducts(
-    count:   j['count']   as int,
-    next:    j['next']    as String?,
-    results: (j['results'] as List)
-        .map((e) => Product.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
+  factory PaginatedProducts.fromJson(Map<String, dynamic> j) =>
+      PaginatedProducts(
+        count:   j['count'] as int,
+        next:    j['next'] as String?,
+        results: (j['results'] as List)
+            .map((e) => Product.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
 }

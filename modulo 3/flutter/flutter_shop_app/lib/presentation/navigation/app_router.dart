@@ -21,6 +21,7 @@ import '../screens/admin/categories_admin_screen.dart';
 import '../screens/admin/products_admin_screen.dart';
 import '../screens/admin/orders_admin_screen.dart';
 import '../screens/admin/order_admin_detail_screen.dart';
+import '../screens/admin/users_admin_screen.dart';
 
 
 // lib/presentation/navigation/app_router.dart — placeholder solo para AdminShell
@@ -136,7 +137,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => AdminShell(
           title: 'Usuarios',
           currentRoute: state.matchedLocation,
-          child: child: const UsersAdminScreen(),
+          child: const UsersAdminScreen(),
         ),
       ),
     ],
