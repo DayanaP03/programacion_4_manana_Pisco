@@ -18,6 +18,8 @@ import '../screens/orders/orders_screen.dart';
 import '../widgets/admin_shell.dart';
 import 'public_shell.dart';
 import '../screens/admin/categories_admin_screen.dart';
+import '../screens/admin/products_admin_screen.dart';
+
 
 
 // lib/presentation/navigation/app_router.dart — placeholder solo para AdminShell
@@ -107,7 +109,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => AdminShell(
           title: 'Productos',
           currentRoute: state.matchedLocation,
-          child: const _AdminPlaceholder('Productos — M9'),
+          child: const ProductsAdminScreen(),
         ),
       ),
       GoRoute(
