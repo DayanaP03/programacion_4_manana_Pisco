@@ -24,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
             child: Container(
               width:  double.infinity,
               padding: const EdgeInsets.fromLTRB(24, 72, 24, 48),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end:   Alignment.bottomCenter,

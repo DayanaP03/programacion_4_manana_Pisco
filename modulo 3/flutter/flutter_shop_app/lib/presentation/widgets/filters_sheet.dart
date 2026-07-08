@@ -180,14 +180,22 @@ class _FiltersSheetState extends State<_FiltersSheet> {
                 // ── Sort by ───────────────────────────────
                 const _SectionTitle('Sort by'),
                 const SizedBox(height: 8),
-                ..._orderOptions.map((o) => RadioListTile<String>(
-                      title: Text(o.$1),
-                      value: o.$2,
-                      groupValue: _ordering,
-                      onChanged: (v) => setState(() => _ordering = v),
-                      activeColor: AppColors.accent,
-                      contentPadding: EdgeInsets.zero,
-                    )),
+                RadioGroup<String>(
+                  groupValue: _ordering,
+                  onChanged: (value) => setState(() => _ordering = value),
+                  child: Column(
+                    children: _orderOptions
+                        .map(
+                          (o) => RadioListTile<String>(
+                            title: Text(o.$1),
+                            value: o.$2,
+                            activeColor: AppColors.accent,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
               ],
             ),
           ),
