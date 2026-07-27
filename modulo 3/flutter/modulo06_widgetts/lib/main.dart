@@ -1,130 +1,46 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:modulo06_widgetts/widgets/catalogo_basico.dart';
-import 'widgets/etiqueta.dart';
-import 'widgets/servicio_estado.dart';
-import 'widgets/contador_limitado.dart';
-import 'widgets/reloj.dart';
-import 'screens/pantalla_contexto.dart';
-import 'widgets/indicador.dart';
-// ┌──────────────────────────────────────────────────────────────────┐
-// │  Cambia este número y guarda (Ctrl+S) para navegar entre pasos.  │
-// │  1  Paso 1   StatelessWidget mínimo                              │
-// │  2  Paso 1b  Widgets básicos — catálogo                          │
-// │  3  Paso 2   StatelessWidget con parámetros                      │
-// │  4  Paso 3   StatefulWidget / setState / cambio de estatus       │
-// │  5  Paso 3b  Parámetros en StatefulWidget                        │
-// │  6  Paso 4   Ciclo de vida con Timer                             │
-// │  7  Paso 5   BuildContext                                        │
-// │  8  Paso 6   Composición de widgets                              │
-// └──────────────────────────────────────────────────────────────────┘
-const int paso = 8;
+import 'widgets/servicio_estado_mp.dart'; // Importa el widget creado arriba
 
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  theme: ThemeData(
-    colorScheme:  ColorScheme.fromSeed(
-      seedColor:  Colors.teal,          // ← cambia aquí
-      brightness: Brightness.light,     // ← Brightness.dark para modo oscuro
-    ),
-    useMaterial3: true,
-  ),
-  home: switch (paso) {
-    1 => const Scaffold(body: Center(child: Saludo())),
-    2 => const CatalogoBasicos(),
-    3 => const Scaffold(
-      body: Center(
-        child: Wrap(
-          spacing:    12,
-          runSpacing: 8,
-          children: [
-            Etiqueta(texto: 'Activo',    color: Colors.green),
-            Etiqueta(texto: 'Error',     color: Colors.red,    relleno: true),
-            Etiqueta(texto: 'En espera', color: Colors.orange),
-            Etiqueta(texto: 'Crítico',   color: Colors.red,    fontSize: 16, relleno: true),
-            Etiqueta(texto: 'Info',      color: Colors.blue,   fontSize: 11),
-          ],
-        ),
-      ),
-    ),
-    4 => const Scaffold(
-      body: Center(
-        child: ServicioEstado(nombre: 'nginx-proxy'),
-      ),
-    ),
-    5 => Scaffold(                               // Paso 3b
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ContadorLimitado(
-              etiqueta: 'Intentos de login',
-              limite:   3,
-              color:    Colors.red,
-              onLimite: () => debugPrint('¡Cuenta bloqueada!'),
-            ),
-            const SizedBox(height: 40),
-            ContadorLimitado(
-              etiqueta: 'Conexiones activas',
-              limite:   10,
-              color:    Colors.indigo,
-            ),
-          ],
-        ),
-      ),
-    ),
-    6 => Scaffold(                              // Paso 4
-      appBar: AppBar(title: const Text('Cronómetro')),
-      body: const Center(child: Reloj()),
-    ),
-    7 => const PantallaContexto(),  
-    8 => Scaffold(                             // Paso 6
-      body: Center(
-        child: Wrap(
-          spacing:    32,
-          runSpacing: 24,
-          alignment:  WrapAlignment.center,
-          children: const [
-            Indicador(label: 'Servidores activos', valor: '8',
-                      color: Colors.green, icono: Icons.dns),
-            Indicador(label: 'Alertas críticas',   valor: '2',
-                      color: Colors.red,   icono: Icons.warning_amber,
-                      subtitulo: 'Requieren atención'),
-            Indicador(label: 'Tráfico',            valor: '4.2 GB',
-                      color: Colors.indigo),
-            Indicador(label: 'Uptime',             valor: '99.8%',
-                      color: Colors.teal, subtitulo: 'Últimos 30 días'),
-          ],
-        ),
-      ),
-    ),  // Paso 5 — ya tiene su propio Scaffold
-    _ => Scaffold(body: Center(child: Text('Paso $paso: crea el widget primero'))),
-  },
-));
-
-class Saludo extends StatelessWidget {
-  const Saludo({super.key});
-
-  @override
-  Widget build(BuildContext context) {   
-    // describe cómo se ve
-    return const SelectableText(
-      'La Tri está obligada a ganar tras la derrota ante Costa de Marfil.',
-      style: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.bold, 
-        letterSpacing: 4,
-        color: Colors.deepPurple,
-        shadows: [
-          Shadow(color: Colors.black26, blurRadius: 4, offset: Offset(2,2)),
-        ]
-      ),
-      textAlign: TextAlign.left,
-      // overflow: TextOverflow.ellipsis,
-      maxLines: 3,
-      );
-
-      
-  }
+void main() {
+  runApp(const ServicioEstadoMp(nombre: 'Suite Deluxe #302'));
 }
 
+class ServicioEstadoMp extends StatelessWidget {
+  const ServicioEstadoMp({super.key, required this.nombre});
+
+  final String nombre;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Estado de Habitación Hotel',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF0E0E0E),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFFFF007F),
+          primaryContainer: Color(0xFF1A1A1A),
+          secondary: Color(0xFF03DAC6),
+          surface: Color(0xFF121212),
+          error: Color(0xFFCF6679),
+        ),
+        useMaterial3: true,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Control de Estado de Habitaciones'),
+          backgroundColor: const Color(0xFF1A1A1A),
+        ),
+        body: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ServicioEstadoMp(
+              nombre: 'Suite Deluxe #302',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
