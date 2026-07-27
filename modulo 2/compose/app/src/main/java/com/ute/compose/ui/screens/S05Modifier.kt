@@ -60,7 +60,7 @@ fun S05ModifierScreen() {
                 .background(Color(0xFFFFCDD2))    // 1° pinta (sin recorte aún)
                 .clip(RoundedCornerShape(16.dp))  // 2° recorta — tarde para el fondo
                 .padding(12.dp)
-                 .clickable { ultimoClick = "Click Backgroud  ✅" },
+                .clickable { ultimoClick = "Click en background ✅" },
             contentAlignment = Alignment.Center
         ) {
             Text("background\nantes de\nclip ❌",
@@ -74,12 +74,12 @@ fun S05ModifierScreen() {
                     Box(
                         modifier = Modifier
                             .size(56.dp)
-                            .clip(CircleShape) //que lo trasfrome en un circulo
+                            .clip(CircleShape)
                             .background(color)
                             .clickable { ultimoClick = "Avatar $letra presionado" },
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(letra, color = Color.White, //parte visual imprimir
+                        Text(letra, color = Color.White,
                             style = MaterialTheme.typography.titleMedium)
                     }
                 }

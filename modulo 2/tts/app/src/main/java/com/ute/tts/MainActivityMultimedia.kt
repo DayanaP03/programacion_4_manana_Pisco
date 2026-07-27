@@ -119,11 +119,11 @@ class MainActivityMultimedia : AppCompatActivity() {
     }
 
 
-  //*  override fun onBackPressed() {
-     //   if (this::webView.isInitialized && webView.canGoBack()) {
-         //   webView.goBack()
-       // } else {
-         //   super.onBackPressed()
-       // }
-   // }
+    override fun onBackPressed() {
+        if (this::webView.isInitialized && webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

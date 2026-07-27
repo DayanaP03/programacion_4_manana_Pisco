@@ -1,8 +1,5 @@
 package com.ute.compose.ui.screens
 
-// ui/S03_Button.kt
-
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -47,7 +44,7 @@ fun S03ButtonScreen() {
             modifier = Modifier.fillMaxWidth()
         ) { Text("Button — Primary") }
 
-        // Button con ícono dentro del slot de contenido
+        // Button con icono dentro del slot de contenido
         Button(
             onClick  = { ultimoClick = "Button con ícono" },
             modifier = Modifier.fillMaxWidth()

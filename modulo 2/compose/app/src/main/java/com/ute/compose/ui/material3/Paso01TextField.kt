@@ -1,6 +1,5 @@
 package com.ute.compose.ui.material3
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -210,5 +209,4 @@ private fun DemoFormularioContacto() {
 @Composable
 fun Paso01_Preview() {
     MaterialTheme { Paso01TextFieldScreen() }
-
 }
