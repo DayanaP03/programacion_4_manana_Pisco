@@ -1,6 +1,7 @@
 // En React web usarías <div> y <span>.
 // En React Native usas <View> y <Text> — el resultado es nativo real.
 
+import * as React from 'react'
 import { View, Text } from "react-native"
 
 interface TarjetaServidorProps {
