@@ -1,232 +1,162 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'widgets/formulario_servidor.dart';
-import 'models/servidor_ssh.dart';
-import 'widgets/fila_servidor.dart';
-import 'screens/pantalla_servidores.dart';
-import 'widgets/tarjeta_servidor_grid.dart';
+import 'models/servidor_ssh_mp.dart';
+import 'screens/pantalla_busqueda_mp.dart';
+import 'widgets/tarjetaservidorgrid_mp.dart';
 
-
-
-// ┌──────────────────────────────────────────────────────────────────┐
-// │  Cambia este número y guarda (Ctrl+S) para navegar entre pasos. │
-// │  1  Paso 1  TextField + TextEditingController + FocusNode       │
-// │  2  Paso 2  Form + TextFormField + validación                   │
-// │  3  Paso 3  Modelo + ListView.builder + ListTile acciones       │
-// │  4  Paso 4  GridView.builder + toggle lista/grid                │
-// │  5  Paso 5  SearchBar + filtrado en tiempo real                 │
-// └──────────────────────────────────────────────────────────────────┘
-const int paso = 4;
-
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  theme: ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF1B5E20),
-    ),
-    useMaterial3: true,
-  ),
-  home: switch (paso) {
-    1 => const _Paso1(),
-    2 => const _Paso2(),
-    3 => const _Paso3(),
-    4 => const PantallaServidores(),
-    5 => const PantallaBusqueda(),
-
-  
-    _ => Scaffold(
-        body: Center(child: Text('Paso $paso: crea el widget primero'))),
-  },
-));
-
-// ─── Paso 1 — vive en main.dart ────────────────────────────────────────
-class _Paso1 extends StatefulWidget {
-  const _Paso1();
-  @override
-  State<_Paso1> createState() => _Paso1State();
+void main() {
+  runApp(const MyApp());
 }
 
-class _Paso1State extends State<_Paso1> {
-  final _ctrlHostname = TextEditingController();
-  final _ctrlIp       = TextEditingController();
-  final _ctrlPuerto   = TextEditingController(text: '22');
-  final _focusIp      = FocusNode();
-  final _focusPuerto  = FocusNode();
-
-  @override
-  void dispose() {
-    _ctrlHostname.dispose();
-    _ctrlIp.dispose();
-    _ctrlPuerto.dispose();
-    _focusIp.dispose();
-    _focusPuerto.dispose();
-    super.dispose();
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
-    return Scaffold(
-      appBar: AppBar(
-        title:           const Text('Conexión SSH'),
-        backgroundColor: cs.primaryContainer,
-        foregroundColor: cs.onPrimaryContainer,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller:      _ctrlHostname,
-              decoration:      const InputDecoration(
-                labelText:  'Hostname',
-                hintText:   'prod-web-01',
-                prefixIcon: Icon(Icons.dns),
-                border:     OutlineInputBorder(),
-              ),
-              textInputAction: TextInputAction.next,
-              onSubmitted:     (_) => _focusIp.requestFocus(),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller:      _ctrlIp,
-              focusNode:       _focusIp,
-              decoration:      const InputDecoration(
-                labelText:  'Dirección IP',
-                hintText:   '192.168.1.100',
-                prefixIcon: Icon(Icons.router),
-                border:     OutlineInputBorder(),
-              ),
-              keyboardType:    TextInputType.number,
-              textInputAction: TextInputAction.next,
-              onSubmitted:     (_) => _focusPuerto.requestFocus(),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller:  _ctrlPuerto,
-              focusNode:   _focusPuerto,
-              decoration:  const InputDecoration(
-                labelText:  'Puerto SSH',
-                prefixIcon: Icon(Icons.lock_outline),
-                border:     OutlineInputBorder(),
-              ),
-              keyboardType:    TextInputType.number,
-              textInputAction: TextInputAction.done,
-              onSubmitted:     (_) => FocusScope.of(context).unfocus(),
-            ),
-            const SizedBox(height: 20),
-            FilledButton.icon(
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Conectando a ${_ctrlHostname.text} '
-                      '(${_ctrlIp.text}:${_ctrlPuerto.text})',
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              icon:  const Icon(Icons.terminal),
-              label: const Text('Conectar'),
-            ),
-            const SizedBox(height: 8),
-            OutlinedButton(
-              onPressed: () {
-                _ctrlHostname.clear();
-                _ctrlIp.clear();
-                _ctrlPuerto.text = '22';
-              },
-              child: const Text('Limpiar campos'),
-            ),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const PantallaBusquedaHotel(),
     );
   }
 }
 
-class _Paso2 extends StatelessWidget {
-  const _Paso2();
+class PantallaBusquedaHotel extends StatefulWidget {
+  const PantallaBusquedaHotel({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
-    return Scaffold(
-      appBar: AppBar(
-        title:           const Text('Nuevo servidor'),
-        backgroundColor: cs.primaryContainer,
-        foregroundColor: cs.onPrimaryContainer,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: FormularioServidor(
-          onGuardar: (datos) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                    'Guardado: ${datos['nombre']} — ${datos['ip']}:${datos['puerto']}'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  State<PantallaBusquedaHotel> createState() => _PantallaBusquedaHotelState();
 }
 
-class _Paso3 extends StatefulWidget {
-  const _Paso3();
-  @override
-  State<_Paso3> createState() => _Paso3State();
-}
-
-class _Paso3State extends State<_Paso3> {
-  final _servidores = [
-    ServidorSSH(id:'1', nombre:'prod-web-01',  ip:'10.0.2.10',   puerto:22,   usuario:'deploy',   so:'Ubuntu 24.04', ssl:true,  favorito:true),
-    ServidorSSH(id:'2', nombre:'prod-db-01',   ip:'10.0.2.20',   puerto:22,   usuario:'postgres', so:'Debian 12',    ssl:true),
-    ServidorSSH(id:'3', nombre:'staging-api',  ip:'10.0.3.10',   puerto:2222, usuario:'ubuntu',   so:'Ubuntu 24.04', ssl:false),
-    ServidorSSH(id:'4', nombre:'dev-sandbox',  ip:'192.168.1.5', puerto:22,   usuario:'vagrant',  so:'Alpine Linux', ssl:false),
+class _PantallaBusquedaHotelState extends State<PantallaBusquedaHotel> {
+  final _habitaciones = [
+    HabitacionHotel(id: '1', nombre: 'Suite Deluxe Mar', ubicacion: 'Torre Norte', piso: 4, tipoBed: 'King Size', wifiGratis: true, favorito: true),
+    HabitacionHotel(id: '2', nombre: 'Doble Estándar', ubicacion: 'Torre Sur', piso: 2, tipoBed: 'Doble Queen', wifiGratis: true),
+    HabitacionHotel(id: '3', nombre: 'Junior Suite', ubicacion: 'Ático', piso: 6, tipoBed: 'King Size', wifiGratis: false),
+    HabitacionHotel(id: '4', nombre: 'Habitación Individual', ubicacion: 'Planta Baja', piso: 1, tipoBed: 'Individual', wifiGratis: false),
   ];
 
+  String _busqueda = '';
+  bool _modoGrid = true;
+
+  List<HabitacionHotel> get _filtrados => _habitaciones
+      .where((h) =>
+          h.nombre.toLowerCase().contains(_busqueda.toLowerCase()) ||
+          h.ubicacion.toLowerCase().contains(_busqueda.toLowerCase()) ||
+          h.tipoBed.toLowerCase().contains(_busqueda.toLowerCase()))
+      .toList();
+
+  void _toggleFavorito(HabitacionHotel h) =>
+      setState(() => h.favorito = !h.favorito);
+
+  void _eliminar(HabitacionHotel h) =>
+      setState(() => _habitaciones.removeWhere((x) => x.id == h.id));
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final filtrados = _filtrados;
 
     return Scaffold(
       appBar: AppBar(
-        title:           Text('Servidores (${_servidores.length})'),
+        title: Text('Habitaciones (${_habitaciones.length})'),
         backgroundColor: cs.primaryContainer,
         foregroundColor: cs.onPrimaryContainer,
+        actions: [
+          IconButton(
+            icon: Icon(_modoGrid ? Icons.list : Icons.grid_view),
+            onPressed: () => setState(() => _modoGrid = !_modoGrid),
+            tooltip: _modoGrid ? 'Vista lista' : 'Vista cuadrícula',
+          ),
+        ],
       ),
-      body: _servidores.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.dns_outlined, size: 56, color: cs.onSurfaceVariant),
-                  const SizedBox(height: 12),
-                  Text('Sin servidores',
-                      style: TextStyle(color: cs.onSurfaceVariant)),
-                ],
-              ),
-            )
-          : ListView.separated(
-              itemCount:        _servidores.length,
-              separatorBuilder: (_, __) =>
-                  const Divider(height: 1, indent: 72),
-              itemBuilder: (ctx, i) => FilaServidor(
-                servidor:   _servidores[i],
-                onFavorito: () => setState(() =>
-                    _servidores[i].favorito = !_servidores[i].favorito),
-                onEliminar: () => setState(() => _servidores.removeAt(i)),
+      body: Column(
+        children: [
+          // ── SearchBar ─────────────────────────────────────────────
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+            child: SearchBar(
+              hintText: 'Buscar por nombre, ubicación o cama...',
+              leading: const Icon(Icons.search),
+              trailing: _busqueda.isNotEmpty
+                  ? [
+                      IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () => setState(() => _busqueda = ''),
+                      ),
+                    ]
+                  : null,
+              onChanged: (v) => setState(() => _busqueda = v),
+              padding: const WidgetStatePropertyAll(
+                EdgeInsets.symmetric(horizontal: 16),
               ),
             ),
+          ),
+
+          // ── Contador de resultados ────────────────────────────────
+          if (_busqueda.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 16, bottom: 4),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '${filtrados.length} resultado${filtrados.length == 1 ? '' : 's'}',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: cs.onSurfaceVariant,
+                      ),
+                ),
+              ),
+            ),
+
+          // ── Lista o Grid ──────────────────────────────────────────
+          Expanded(
+            child: filtrados.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.search_off, size: 56, color: cs.onSurfaceVariant),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Sin resultados para "$_busqueda"',
+                          style: TextStyle(color: cs.onSurfaceVariant),
+                        ),
+                        const SizedBox(height: 8),
+                        TextButton(
+                          onPressed: () => setState(() => _busqueda = ''),
+                          child: const Text('Limpiar búsqueda'),
+                        ),
+                      ],
+                    ),
+                  )
+                : _modoGrid
+                    ? GridView.builder(
+                        padding: const EdgeInsets.all(12),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.1,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: filtrados.length,
+                        itemBuilder: (ctx, i) => TarjetaReservaHotelGridMp(
+                          habitacion: filtrados[i],
+                          onFavorito: () => _toggleFavorito(filtrados[i]),
+                          onEliminar: () => _eliminar(filtrados[i]),
+                        ),
+                      )
+                    : ListView.separated(
+                        itemCount: filtrados.length,
+                        separatorBuilder: (_, __) =>
+                            const Divider(height: 1, indent: 72),
+                        itemBuilder: (ctx, i) => FilaHabitacion(
+                          habitacion: filtrados[i],
+                          onFavorito: () => _toggleFavorito(filtrados[i]),
+                          onEliminar: () => _eliminar(filtrados[i]),
+                        ),
+                      ),
+          ),
+        ],
+      ),
     );
   }
 }
