@@ -14,19 +14,29 @@ final appRouterPaso3 = GoRouter(
       builder: (context, state) => const PantallaInicio(),
     ),
     GoRoute(
-      path:    '/servidores',
+      path:    '/reservas',
       builder: (context, state) {
-        // Query parameters — /servidores?soloSSL=true
-        final soloSSL = state.uri.queryParameters['soloSSL'] == 'true';
-        return PantallaServidoresFiltro(soloSSL: soloSSL);
+        // Query parameters — /reservas?soloDesayuno=true
+        final soloDesayuno = state.uri.queryParameters['soloDesayuno'] == 'true';
+        return PantallaServidoresFiltro(soloDesayuno: soloDesayuno);
       },
     ),
     GoRoute(
-      path:    '/servidores/:id',
+      path:    '/reservas/:id',
       builder: (context, state) {
         final id       = state.pathParameters['id']!;
-        final servidor = state.extra as ServidorSSH?;
-        return PantallaDetalle(id: id, servidor: servidor);
+        final reserva = state.extra as ReservaHotel?;
+        return PantallaDetalle(id: id, reserva: reserva);
+      },
+    ),
+    GoRoute(
+      path:    '/reservas/:id/comprobante',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        return Scaffold(
+          appBar: AppBar(title: Text('Comprobante #$id')),
+          body:   Center(child: Text('Tu reserva #$id esta confirmada.')),
+        );
       },
     ),
   ],

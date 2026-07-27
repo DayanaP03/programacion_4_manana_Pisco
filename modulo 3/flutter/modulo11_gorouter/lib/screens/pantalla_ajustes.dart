@@ -11,7 +11,7 @@ class PantallaAjustes extends StatelessWidget {
       children: [
         Icon(Icons.settings, size: 56),
         SizedBox(height: 8),
-        Text('Ajustes de la app', style: TextStyle(fontSize: 18)),
+        Text('Ajustes de reservas y notificaciones', style: TextStyle(fontSize: 18)),
       ],
     )),
   );

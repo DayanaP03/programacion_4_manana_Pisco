@@ -45,11 +45,11 @@ class AppMonitoreo extends ConsumerWidget {
     };
 
     return MaterialApp.router(
-      title:        'Monitor SSH',
+      title:        'Reservas de Hotel',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0D47A1)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1565C0)),
         useMaterial3: true,
       ),
     );

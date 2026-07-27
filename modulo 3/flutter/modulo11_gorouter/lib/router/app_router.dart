@@ -13,8 +13,8 @@ final appRouter = GoRouter(
       builder: (context, state) => const PantallaInicio(),
     ),
     GoRoute(
-      path:    '/servidores',
-      name:    'servidores',
+      path:    '/reservas',
+      name:    'reservas',
       builder: (context, state) => const PantallaServidores(),
     ),
   ],

@@ -9,7 +9,7 @@ import '../screens/pantalla_ajustes.dart';
 import '../models/servidor_ssh.dart';
 
 final appRouterPaso4 = GoRouter(
-  initialLocation: '/servidores',
+  initialLocation: '/reservas',
   debugLogDiagnostics: true,
   routes: [
     // ShellRoute — mantiene ScaffoldConNav vivo entre rutas hijas
@@ -17,15 +17,25 @@ final appRouterPaso4 = GoRouter(
       builder: (context, state, child) => ScaffoldConNav(child: child),
       routes: [
         GoRoute(
-          path:    '/servidores',
+          path:    '/reservas',
           builder: (_, __) => const PantallaServidores(),
           routes: [
             GoRoute(
               path:    ':id',
               builder: (context, state) {
                 final id       = state.pathParameters['id']!;
-                final servidor = state.extra as ServidorSSH?;
-                return PantallaDetalle(id: id, servidor: servidor);
+                final reserva = state.extra as ReservaHotel?;
+                return PantallaDetalle(id: id, reserva: reserva);
+              },
+            ),
+            GoRoute(
+              path: ':id/comprobante',
+              builder: (context, state) {
+                final id = state.pathParameters['id']!;
+                return Scaffold(
+                  appBar: AppBar(title: Text('Comprobante #$id')),
+                  body: Center(child: Text('Reserva #$id lista para check-in.')),
+                );
               },
             ),
           ],

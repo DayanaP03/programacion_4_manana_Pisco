@@ -11,7 +11,7 @@ class ScaffoldConNav extends StatelessWidget {
     final loc = GoRouterState.of(context).uri.path;
     if (loc.startsWith('/metricas')) return 1;
     if (loc.startsWith('/ajustes'))  return 2;
-    return 0; // /servidores
+    return 0; // /reservas
   }
 
   @override
@@ -22,15 +22,15 @@ class ScaffoldConNav extends StatelessWidget {
         selectedIndex:         _indiceActivo(context),
         onDestinationSelected: (i) {
           switch (i) {
-            case 0: context.go('/servidores');
+            case 0: context.go('/reservas');
             case 1: context.go('/metricas');
             case 2: context.go('/ajustes');
           }
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.dns_outlined), selectedIcon: Icon(Icons.dns),
-            label: 'Servidores',
+            icon: Icon(Icons.hotel_outlined), selectedIcon: Icon(Icons.hotel),
+            label: 'Reservas',
           ),
           NavigationDestination(
             icon: Icon(Icons.bar_chart_outlined), selectedIcon: Icon(Icons.bar_chart),

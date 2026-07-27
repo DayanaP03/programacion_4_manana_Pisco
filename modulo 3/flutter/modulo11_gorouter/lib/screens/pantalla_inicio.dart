@@ -11,7 +11,7 @@ class PantallaInicio extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title:           const Text('Monitor SSH'),
+        title:           const Text('Reservas de Hotel'),
         backgroundColor: cs.primaryContainer,
         foregroundColor: cs.onPrimaryContainer,
       ),
@@ -19,19 +19,19 @@ class PantallaInicio extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.terminal, size: 64, color: cs.primary),
+            Icon(Icons.hotel, size: 64, color: cs.primary),
             const SizedBox(height: 16),
-            const Text('Dashboard de Monitoreo',
+            const Text('Gestion de Reservas',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            Text('Gestiona tus servidores SSH',
+            Text('Administra reservas, precios y disponibilidad',
                 style: TextStyle(color: cs.onSurfaceVariant)),
             const SizedBox(height: 32),
             FilledButton.icon(
               // context.go() — navega SIN apilar (no hay botón "atrás")
-              onPressed: () => context.go('/servidores'),
-              icon:  const Icon(Icons.dns),
-              label: const Text('Ver servidores'),
+              onPressed: () => context.go('/reservas'),
+              icon:  const Icon(Icons.bed),
+              label: const Text('Ver reservas'),
             ),
           ],
         ),

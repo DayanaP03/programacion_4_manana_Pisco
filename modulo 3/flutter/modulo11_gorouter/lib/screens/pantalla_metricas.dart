@@ -11,7 +11,7 @@ class PantallaMetricas extends StatelessWidget {
       children: [
         Icon(Icons.bar_chart, size: 56),
         SizedBox(height: 8),
-        Text('Métricas de servidores', style: TextStyle(fontSize: 18)),
+        Text('Metricas de ocupacion y reservas', style: TextStyle(fontSize: 18)),
       ],
     )),
   );

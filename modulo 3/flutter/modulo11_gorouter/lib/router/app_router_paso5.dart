@@ -13,7 +13,7 @@ import '../models/servidor_ssh.dart';
 
 // Función que crea el router con acceso al WidgetRef (para el guard)
 GoRouter appRouterPaso5(WidgetRef ref) => GoRouter(
-  initialLocation: '/servidores',
+  initialLocation: '/reservas',
   debugLogDiagnostics: true,
   redirect: (context, state) {
     final authState     = ref.read(authProvider);
@@ -23,7 +23,7 @@ GoRouter appRouterPaso5(WidgetRef ref) => GoRouter(
     // No autenticado y no está en /login → ir al login
     if (!autenticado && !enLogin) return '/login';
     // Autenticado y está en /login → ir a la app
-    if (autenticado && enLogin)   return '/servidores';
+    if (autenticado && enLogin)   return '/reservas';
     // Sin redirección
     return null;
   },
@@ -32,15 +32,27 @@ GoRouter appRouterPaso5(WidgetRef ref) => GoRouter(
       builder: (context, state, child) => ScaffoldConNav(child: child),
       routes: [
         GoRoute(
-          path:    '/servidores',
+          path:    '/reservas',
           builder: (_, __) => const PantallaServidores(),
           routes: [
             GoRoute(
               path:    ':id',
               builder: (context, state) => PantallaDetalle(
                 id:       state.pathParameters['id']!,
-                servidor: state.extra as ServidorSSH?,
+                reserva: state.extra as ReservaHotel?,
               ),
+            ),
+            GoRoute(
+              path: ':id/comprobante',
+              builder: (context, state) {
+                final id = state.pathParameters['id']!;
+                return Scaffold(
+                  appBar: AppBar(title: Text('Comprobante #$id')),
+                  body: Center(
+                    child: Text('Reserva #$id confirmada. Gracias por elegirnos.'),
+                  ),
+                );
+              },
             ),
           ],
         ),

@@ -4,40 +4,43 @@ import 'package:go_router/go_router.dart';
 import '../models/servidor_ssh.dart';
 
 class PantallaServidoresFiltro extends StatelessWidget {
-  final bool soloSSL;
-  const PantallaServidoresFiltro({super.key, this.soloSSL = false});
+  final bool soloDesayuno;
+  const PantallaServidoresFiltro({super.key, this.soloDesayuno = false});
 
   @override
   Widget build(BuildContext context) {
-    final filtrados = soloSSL
-        ? servidoresSimulados.where((s) => s.ssl).toList()
-        : servidoresSimulados;
+    final filtrados = soloDesayuno
+        ? reservasSimuladas.where((r) => r.desayunoIncluido).toList()
+        : reservasSimuladas;
 
     return Scaffold(
       appBar: AppBar(
-        title:   Text('Servidores${soloSSL ? ' (SSL)' : ''}'),
+        title:   Text('Reservas${soloDesayuno ? ' (con desayuno)' : ''}'),
         actions: [
-          // Toggle filtro SSL — cambia la URL con query param
+          // Toggle filtro desayuno — cambia la URL con query param
           IconButton(
-            icon:    Icon(soloSSL ? Icons.lock : Icons.lock_open),
-            tooltip: soloSSL ? 'Ver todos' : 'Solo SSL',
-            onPressed: () => soloSSL
-                ? context.go('/servidores')
-                : context.go('/servidores?soloSSL=true'),
+            icon:    Icon(soloDesayuno ? Icons.free_breakfast : Icons.breakfast_dining),
+            tooltip: soloDesayuno ? 'Ver todos' : 'Solo con desayuno',
+            onPressed: () => soloDesayuno
+                ? context.go('/reservas')
+                : context.go('/reservas?soloDesayuno=true'),
           ),
         ],
       ),
       body: ListView.builder(
         itemCount:   filtrados.length,
         itemBuilder: (context, i) {
-          final s = filtrados[i];
+          final r = filtrados[i];
           return ListTile(
-            leading: Icon(Icons.dns, color: s.ssl ? Colors.green : Colors.grey),
-            title:   Text(s.nombre),
-            subtitle: Text(s.ip),
+            leading: Icon(
+              Icons.hotel,
+              color: r.desayunoIncluido ? Colors.green : Colors.grey,
+            ),
+            title:   Text(r.hotel),
+            subtitle: Text('${r.ciudad} • S/ ${r.precioNoche.toStringAsFixed(0)}'),
             onTap: () => context.push(
-              '/servidores/${s.id}',
-              extra: s,   // pasa el objeto completo
+              '/reservas/${r.id}',
+              extra: r,   // pasa el objeto completo
             ),
           );
         },
